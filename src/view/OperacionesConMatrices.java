@@ -23,12 +23,6 @@ public class OperacionesConMatrices {
         vistaPrincipal v = new vistaPrincipal();
         v.setVisible(true);
         
-        /*
-        */
-
-        /*
-        Fraccion f = new Fraccion();
-        f.toFraccion(prueba);*/
     }
     
 }
