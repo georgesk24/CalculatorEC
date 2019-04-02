@@ -38,17 +38,13 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
         /*agregamos nuevos componentes a nuestra vista (JTextField, JSeparator, JLabel)*/
         
         addTextField(view.JmatrizA,  0, 0, true, view.panelAreaOperaciones, true);
-        addSeparator(view.separator, 0, view.JmatrizA.length, view.panelAreaOperaciones, view.JmatrizA[0].length+1);
-        addTextField(view.JmatrizB,  0, view.JmatrizA.length+1, true, view.panelAreaOperaciones, true );        
                
         addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
-        addLabel(new JLabel("Matriz B = "), 0, view.JmatrizA.length+1, view.panelAreaOperaciones, view.JmatrizA.length);                
      
-        addTextField(view.JmatrizC, 0, 0, true, view.panelAreaResultado, false);
-        addLabel(new JLabel("Matriz C= "), 0, 0, view.panelAreaResultado, view.JmatrizC.length);
+        addTextField(view.JmatrizB, 0, 0, true, view.panelAreaResultado, false);
+        addLabel(new JLabel("Det|A|= "), 0, 0, view.panelAreaResultado, view.JmatrizB.length);
 
         addEvents(view.JmatrizA);
-        addEvents(view.JmatrizB);
         events();
         
     }
@@ -76,8 +72,7 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
             
             /*inicializamos los arreglos bidimensionales con sus nuevas dimensiones (filas y columnas) */
             view.JmatrizA = new JTextField[longitud][longitud];
-            view.JmatrizB = new JTextField[longitud][longitud];   
-            view.JmatrizC = new JTextField[longitud][longitud];               
+            view.JmatrizB = new JTextField[longitud][longitud];               
             
             /*removemos los componentes que estan agregados actualmente en los respectivos JPanel
             panelAreaOperaciones y panelAreaResultado */
@@ -88,13 +83,10 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
             en los respectivos JPanel*/
             
             addTextField(view.JmatrizA, 0, 0, true, view.panelAreaOperaciones, true);
-            addSeparator(view.separator, 0, longitud, view.panelAreaOperaciones, view.JmatrizA[0].length+1);
-            addTextField(view.JmatrizB,  0, longitud+1, true, view.panelAreaOperaciones, true );  
             addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
-            addLabel(new JLabel("Matriz B = "), 0, longitud+1, view.panelAreaOperaciones, view.JmatrizA.length);            
 
-            addTextField(view.JmatrizC, 0, 0, true, view.panelAreaResultado, false);
-            addLabel(new JLabel("Matriz C = "), 0, 0, view.panelAreaResultado, view.JmatrizC.length);
+            addTextField(view.JmatrizB, 0, 0, true, view.panelAreaResultado, false);
+            addLabel(new JLabel("Det|A|= "), 0, 0, view.panelAreaResultado, view.JmatrizB.length);
 
             /*actualizamos los respectivos JPanel haciendo uso del metodo updateUI de esta manera se efectuaran
             los cambios en nuestra ventana */
@@ -141,7 +133,6 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
 
                 limpiarCampos(view.JmatrizA);
                 limpiarCampos(view.JmatrizB);
-                limpiarCampos(view.JmatrizC);
                 view.panelAreaResultado.setVisible(false);
 
             }
