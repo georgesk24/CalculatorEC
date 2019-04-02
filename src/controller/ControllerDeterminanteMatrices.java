@@ -39,13 +39,17 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
         model = new ModelDeterminanteMatrices();
         /*agregamos nuevos componentes a nuestra vista (JTextField, JSeparator, JLabel)*/
         
-        addTextField(view.JmatrizA,  0, 0, true, view.panelAreaOperaciones, true);
-               
+        addTextField(view.JmatrizA,  0, 0, true, view.panelAreaOperaciones, true);               
         addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
-     
-        addTextField(view.JmatrizDetA, 0, 0, true, view.panelAreaResultado, false);
-        addLabel(new JLabel("Det|A|="), 0, 0, view.panelAreaResultado, view.JmatrizDetA.length);
 
+        addTextField(view.JmatrizARes, 0, 0, true, view.panelAreaResultado, false);
+        addLabel(new JLabel("A="), 0, 0, view.panelAreaResultado, view.JmatrizARes.length);
+
+        addSeparator(view.separator, 0, view.JmatrizA.length, view.panelAreaResultado, view.JmatrizARes[0].length+1);        
+        
+        addTextField(view.JmatrizDetA, 0, view.JmatrizDetA.length+1, true, view.panelAreaResultado, false);
+        addLabel(new JLabel("="), 0, view.JmatrizDetA.length+1, view.panelAreaResultado, view.JmatrizDetA.length);
+        
         addEvents(view.JmatrizA);
         events();
         
@@ -74,27 +78,37 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
             
             /*inicializamos los arreglos bidimensionales con sus nuevas dimensiones (filas y columnas) */
             view.JmatrizA = new JTextField[longitud][longitud];
+            view.JmatrizARes = new JTextField[longitud][longitud];
             view.JmatrizDetA = new JTextField[longitud][longitud];               
             
             /*removemos los componentes que estan agregados actualmente en los respectivos JPanel
             panelAreaOperaciones y panelAreaResultado */
             view.panelAreaOperaciones.removeAll();
             view.panelAreaResultado.removeAll();
-            view.panelAreaResultado.setVisible(false);
+            view.panelAreaResultado.setVisible(true);
             /*llamamos los metodos addTextField, addSeparator y addLabel para agregar los nuevos componentes
             en los respectivos JPanel*/
             
             addTextField(view.JmatrizA, 0, 0, true, view.panelAreaOperaciones, true);
             addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
 
+            addTextField(view.JmatrizARes, 0, 0, true, view.panelAreaResultado, false);
+            addLabel(new JLabel("A="), 0, 0, view.panelAreaResultado, view.JmatrizARes.length);
+
+            addSeparator(view.separator, 0, view.JmatrizARes.length, view.panelAreaResultado, view.JmatrizARes[0].length+1);        
+
+            addTextField(view.JmatrizDetA, 0, view.JmatrizDetA.length+1, true, view.panelAreaResultado, false);
+            addLabel(new JLabel("="), 0, view.JmatrizDetA.length+1, view.panelAreaResultado, view.JmatrizDetA.length);
+            
+            /*
             addTextField(view.JmatrizDetA, 0, 0, true, view.panelAreaResultado, false);
             addLabel(new JLabel("Det|A|="), 0, 0, view.panelAreaResultado, view.JmatrizDetA.length);
-
+            */
+            
             /*actualizamos los respectivos JPanel haciendo uso del metodo updateUI de esta manera se efectuaran
             los cambios en nuestra ventana */
 
             addEvents(view.JmatrizA);
-            addEvents(view.JmatrizDetA);            
             
             view.panelAreaOperaciones.updateUI();   
             view.panelAreaResultado.updateUI();
@@ -109,12 +123,15 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
 
                 if(model.validateData(Ma)==true){
                     
-                    String MdetA [][] = model.metodoDeGauss(Ma);
-                    for (int i = 0; i < view.JmatrizDetA.length; i++) {
-                        for (int j = 0; j < view.JmatrizDetA[0].length; j++) {
-                            view.JmatrizDetA[i][j].setText(MdetA[i][j]);
-                        }
+                    if(!model.getDeterminante(Ma).toString().equals("0")){
+                        String MdetA [][] = model.metodoDeGauss(Ma);
+                        for (int i = 0; i < view.JmatrizDetA.length; i++) {
+                            for (int j = 0; j < view.JmatrizDetA[0].length; j++) {
+                                view.JmatrizDetA[i][j].setText(MdetA[i][j]);
+                            }
+                        }                    
                     }
+                    
 
                     view.panelAreaResultado.setVisible(true);            
 

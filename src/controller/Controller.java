@@ -94,7 +94,7 @@ public class Controller {
         config.gridheight = gridHeight;  
         config.fill = GridBagConstraints.CENTER;
         config.anchor = GridBagConstraints.CENTER;            
-        config.insets = new Insets(0, 0, 0, 30);                
+        config.insets = new Insets(0, 0, 0, 20);                
         panel.add(label, config);    
 
     
