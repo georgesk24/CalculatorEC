@@ -54,6 +54,9 @@ public class Fraccion {
         return new Fraccion(getNumerador() * f.getDenominador(), f.getNumerador() * getDenominador());        
     }    
     
+    public Fraccion inversa(Fraccion f){
+        return new Fraccion(f.getDenominador(), f.getNumerador());
+    }
         
     /*Metodos para simplificar la Fraccion resultante */
     private int mcd(Fraccion f){
@@ -263,7 +266,7 @@ public class Fraccion {
       
         if(this.getDenominador()!=0){
             simplificar(this);
-            if(this.getDenominador()==1){
+            if(this.getDenominador()==1 || this.getNumerador()==0){
                 return String.valueOf(getNumerador());
             }else{
                 return getNumerador()+ "/" + getDenominador();                
