@@ -15,7 +15,7 @@ public class PanelDeterminante extends javax.swing.JPanel {
 
     /*Creamos tres arreglos bidimensionales de tipo JTextField los cuales haran referencia
     a las matrices que trabajaremos */    
-    public JTextField [][] JmatrizA, JmatrizB; 
+    public JTextField [][] JmatrizA, JmatrizDetA; 
     
     ControllerDeterminanteMatrices controller;
     
@@ -27,7 +27,7 @@ public class PanelDeterminante extends javax.swing.JPanel {
         
         /*Asignamos dimensiones a los arreglos */
         JmatrizA = new JTextField[2][2];
-        JmatrizB= new JTextField[2][2];        
+        JmatrizDetA= new JTextField[2][2];        
                 
         controller = new ControllerDeterminanteMatrices(this);
         

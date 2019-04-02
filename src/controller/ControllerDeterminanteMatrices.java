@@ -12,6 +12,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import model.ModelDeterminanteMatrices;
 import view.PanelDeterminante;
 
 /**
@@ -21,7 +22,7 @@ import view.PanelDeterminante;
 public class ControllerDeterminanteMatrices extends Controller implements ActionListener, KeyListener{
     
     PanelDeterminante view;
-
+    ModelDeterminanteMatrices model;
     
     
     /*agregamos los respectivos eventos a utilizar*/
@@ -34,15 +35,16 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
     
     public ControllerDeterminanteMatrices(PanelDeterminante view) {
         this.view = view;
-    
+        
+        model = new ModelDeterminanteMatrices();
         /*agregamos nuevos componentes a nuestra vista (JTextField, JSeparator, JLabel)*/
         
         addTextField(view.JmatrizA,  0, 0, true, view.panelAreaOperaciones, true);
                
         addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
      
-        addTextField(view.JmatrizB, 0, 0, true, view.panelAreaResultado, false);
-        addLabel(new JLabel("Det|A|= "), 0, 0, view.panelAreaResultado, view.JmatrizB.length);
+        addTextField(view.JmatrizDetA, 0, 0, true, view.panelAreaResultado, false);
+        addLabel(new JLabel("Det|A|="), 0, 0, view.panelAreaResultado, view.JmatrizDetA.length);
 
         addEvents(view.JmatrizA);
         events();
@@ -72,7 +74,7 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
             
             /*inicializamos los arreglos bidimensionales con sus nuevas dimensiones (filas y columnas) */
             view.JmatrizA = new JTextField[longitud][longitud];
-            view.JmatrizB = new JTextField[longitud][longitud];               
+            view.JmatrizDetA = new JTextField[longitud][longitud];               
             
             /*removemos los componentes que estan agregados actualmente en los respectivos JPanel
             panelAreaOperaciones y panelAreaResultado */
@@ -85,33 +87,32 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
             addTextField(view.JmatrizA, 0, 0, true, view.panelAreaOperaciones, true);
             addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
 
-            addTextField(view.JmatrizB, 0, 0, true, view.panelAreaResultado, false);
-            addLabel(new JLabel("Det|A|= "), 0, 0, view.panelAreaResultado, view.JmatrizB.length);
+            addTextField(view.JmatrizDetA, 0, 0, true, view.panelAreaResultado, false);
+            addLabel(new JLabel("Det|A|="), 0, 0, view.panelAreaResultado, view.JmatrizDetA.length);
 
             /*actualizamos los respectivos JPanel haciendo uso del metodo updateUI de esta manera se efectuaran
             los cambios en nuestra ventana */
 
             addEvents(view.JmatrizA);
-            addEvents(view.JmatrizB);            
+            addEvents(view.JmatrizDetA);            
             
             view.panelAreaOperaciones.updateUI();   
             view.panelAreaResultado.updateUI();
     
         }else if(evt.equals(view.btnCalcular)){
-            /*
-            String [][] Ma, Mb;
             
-            Ma = convertirArreglo(view.JmatrizA);                        
-            Mb = convertirArreglo(view.JmatrizB);
+            String [][] Ma;
             
-            if(!model.isEmptyArray(Ma) && !model.isEmptyArray(Mb)){
+            Ma = convertirArreglo(view.JmatrizA);       
+ 
+            if(!model.isEmptyArray(Ma)){
 
-                if(model.validateData(Ma)==true && model.validateData(Mb)==true){
-
-                    String Mc [][] = model.sumar(Ma, Mb);
-                    for (int i = 0; i < view.JmatrizC.length; i++) {
-                        for (int j = 0; j < view.JmatrizC[0].length; j++) {
-                            view.JmatrizC[i][j].setText(Mc[i][j]);
+                if(model.validateData(Ma)==true){
+                    
+                    String MdetA [][] = model.metodoDeGauss(Ma);
+                    for (int i = 0; i < view.JmatrizDetA.length; i++) {
+                        for (int j = 0; j < view.JmatrizDetA[0].length; j++) {
+                            view.JmatrizDetA[i][j].setText(MdetA[i][j]);
                         }
                     }
 
@@ -123,7 +124,7 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
                 
             }else{
                 JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "Opción valida", JOptionPane.ERROR_MESSAGE);
-            }*/
+            }
             
         }else if(evt.equals(view.btnLimpiar)){
             
@@ -132,7 +133,7 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
             if(confirmar==JOptionPane.YES_OPTION){
 
                 limpiarCampos(view.JmatrizA);
-                limpiarCampos(view.JmatrizB);
+                limpiarCampos(view.JmatrizDetA);
                 view.panelAreaResultado.setVisible(false);
 
             }
