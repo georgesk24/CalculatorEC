@@ -2,7 +2,7 @@
  *Clase ControllerDeterminanteMatrices.java, donde realizaremos la operaciones para obtener la determinante
  * de una matriz aplicando una serie de metodos para lograr este resultado, igualmente esta clase 
  * es el controlador por lo tanto interactuaremos con los metodos del modelo (ModelDeterminanteMatrices.java) 
- * y los componentes de nuestra vista
+ * y los componentes de nuestra vista dgd
  */
 package controller;
 
