@@ -48,10 +48,10 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
         this.view = view;
         
         /*agregamos nuevos componentes a nuestra vista (JTextField, JLabel)*/        
-        addTextField(view.JmatrizA,  0, 0, true, view.panelAreaOperaciones, true);               
+        addTextField(view.JmatrizA,  0, 0, true, view.panelAreaOperaciones, true, 0);               
         addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
         
-        addTextField(view.JmatrizARes, 0, 0, true, view.panelAreaResultado, false);
+        addTextField(view.JmatrizARes, 0, 0, true, view.panelAreaResultado, false, 0);
         addLabel(new JLabel("A="), 0, 0, view.panelAreaResultado, view.JmatrizARes.length);
         
         /*agregamos los eventos de teclado para los campos de texto generados*/
@@ -85,10 +85,10 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
         /*llamamos los metodos addTextField, y addLabel para agregar los nuevos componentes
         en el panelAreaResultado*/
 
-        addTextField(view.JmatrizA, 0, 0, true, view.panelAreaOperaciones, true);
+        addTextField(view.JmatrizA, 0, 0, true, view.panelAreaOperaciones, true, 0);
         addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
 
-        addTextField(view.JmatrizARes, 0, 0, true, view.panelAreaResultado, false);
+        addTextField(view.JmatrizARes, 0, 0, true, view.panelAreaResultado, false, 0);
         addLabel(new JLabel("A="), 0, 0, view.panelAreaResultado, view.JmatrizARes.length);
 
         /*actualizamos los respectivos JPanel haciendo uso del metodo updateUI de esta manera se efectuaran
@@ -141,7 +141,7 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
                         /*agregamos nuevos componentes*/
                         addSeparator(new JSeparator(), 0, view.JmatrizARes.length, view.panelAreaResultado, view.JmatrizARes[0].length+1);        
 
-                        addTextField(view.JmatrizDetA, 0, view.JmatrizDetA.length+1, true, view.panelAreaResultado, false);
+                        addTextField(view.JmatrizDetA, 0, view.JmatrizDetA.length+1, true, view.panelAreaResultado, false, 0);
                         addLabel(new JLabel("="), 0, view.JmatrizDetA.length+1, view.panelAreaResultado, view.JmatrizDetA.length);
                         
                         /*obtenemos la mattriz resultante despues de realizar las operaciones de determinante
@@ -180,7 +180,7 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
                         view.panelDeterminante.removeAll();
                         view.panelAreaResultado.updateUI();
                         view.panelDeterminante.updateUI();
-                        addTextField(view.JmatrizARes, 0, 0, true, view.panelAreaResultado, false);
+                        addTextField(view.JmatrizARes, 0, 0, true, view.panelAreaResultado, false, 0);
                         addLabel(new JLabel("A="), 0, 0, view.panelAreaResultado, view.JmatrizARes.length);
                         addSeparator(new JSeparator(),  0, view.JmatrizARes.length+view.JmatrizDetA.length+1, view.panelAreaResultado, view.JmatrizDetA[0].length+1);                                                        
                         addComponent(view.panelDeterminante, 0, view.JmatrizARes.length+view.JmatrizDetA.length+2, view.panelAreaResultado, view.JmatrizDetA[0].length+1);                        

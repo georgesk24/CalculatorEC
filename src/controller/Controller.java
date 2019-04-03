@@ -31,7 +31,7 @@ public class Controller {
     Cuarto parametro = variable tipo boolean en la cual determinamos si la celda tendra un tamaño standar o distinto
     quinto parametro = JPanel panel en el cual agregaremos los nuevos componentes 
     */
-    public final void addTextField(JTextField [][] textField, int x, int y, boolean weight, JPanel panel, boolean editable){
+    public final void addTextField(JTextField [][] textField, int x, int y, boolean weight, JPanel panel, boolean editable, int patron){
         
         /*Indices para recorrer el arreglo bidimensional*/
         int i,j;
@@ -70,14 +70,16 @@ public class Controller {
                panel.add(textField[i][j], config);    
                
                textField[i][j].setEditable(editable);
-               
+                
+               x=x+patron;
             }
-
+            x=0;
         }
         
 
     }
-    
+
+
     /*Agregamos una etiqueta de texto a un JPanel este metodo contiene tres parametros
     JLabel = etiqueta de texto la cual desea agregar
     int x = posicion que llevara de manera horizontal 
@@ -101,7 +103,7 @@ public class Controller {
 
     
     }
-
+    
     public final void addComponent(JComponent component, int x, int y, JPanel panel, int gridWidth){
         
         GridBagConstraints config = new GridBagConstraints();

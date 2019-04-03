@@ -1,21 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 package view;
 
+import controller.ControllerGaussJordan;
+import javax.swing.JTextField;
+
 /**
  *
- * @author de
+ * @author SOFTWARE GALAXIA TV
  */
 public class PanelGaussJordan extends javax.swing.JPanel {
-
-    /**
-     * Creates new form SumarMatrices
-     */
+    
+    ControllerGaussJordan controller;
+    
+    public JTextField [][] JmatrizA;
+    public JTextField [] JmatrizResultado;
+    
     public PanelGaussJordan() {
         initComponents();
+        
+        panelAreaResultado.setVisible(false);
+        JmatrizA=new JTextField[2][3];
+        JmatrizResultado= new JTextField[2];
+        controller = new ControllerGaussJordan(this);
     }
 
     /**
@@ -28,22 +35,114 @@ public class PanelGaussJordan extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
+        lbTitle = new javax.swing.JLabel();
+        lbSubTitle = new javax.swing.JLabel();
+        JcVariables = new javax.swing.JComboBox<>();
+        panelAreaOperaciones = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        btnCalcular = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        panelAreaResultado = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(204, 204, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Gauss Jordan");
+        lbTitle.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
+        lbTitle.setText("Método De Eliminación De Gauss Jordan");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(130, 185, 156, 185);
-        add(jLabel1, gridBagConstraints);
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 20, 0);
+        add(lbTitle, gridBagConstraints);
+
+        lbSubTitle.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lbSubTitle.setText("Variables del Sistema :");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 20, 0, 10);
+        add(lbSubTitle, gridBagConstraints);
+
+        JcVariables.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6", "7", "8" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 70;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        add(JcVariables, gridBagConstraints);
+
+        panelAreaOperaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos De Entrada", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        panelAreaOperaciones.setOpaque(false);
+        panelAreaOperaciones.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
+        add(panelAreaOperaciones, gridBagConstraints);
+
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), new java.awt.Color(153, 153, 153), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)));
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 5));
+
+        btnCalcular.setBackground(new java.awt.Color(255, 83, 83));
+        btnCalcular.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnCalcular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/calcular-suma.png"))); // NOI18N
+        btnCalcular.setText("Calcular");
+        btnCalcular.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCalcular.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCalcular.setIconTextGap(14);
+        btnCalcular.setPreferredSize(new java.awt.Dimension(227, 67));
+        jPanel1.add(btnCalcular);
+
+        btnLimpiar.setBackground(new java.awt.Color(123, 167, 225));
+        btnLimpiar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clean.png"))); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnLimpiar.setIconTextGap(14);
+        btnLimpiar.setPreferredSize(new java.awt.Dimension(227, 67));
+        jPanel1.add(btnLimpiar);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
+        add(jPanel1, gridBagConstraints);
+
+        panelAreaResultado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultado", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        panelAreaResultado.setOpaque(false);
+        panelAreaResultado.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 20, 20);
+        add(panelAreaResultado, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JComboBox<String> JcVariables;
+    public javax.swing.JButton btnCalcular;
+    public javax.swing.JButton btnLimpiar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbSubTitle;
+    private javax.swing.JLabel lbTitle;
+    public javax.swing.JPanel panelAreaOperaciones;
+    public javax.swing.JPanel panelAreaResultado;
     // End of variables declaration//GEN-END:variables
 }

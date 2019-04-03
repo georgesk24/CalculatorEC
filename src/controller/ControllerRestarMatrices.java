@@ -40,14 +40,14 @@ public class ControllerRestarMatrices extends Controller implements ActionListen
         
         model = new ModelRestarMatrices();
         
-        addTextField(view.JmatrizA,  0, 0, true, view.panelAreaOperaciones, true);
+        addTextField(view.JmatrizA,  0, 0, true, view.panelAreaOperaciones, true, 0);
         addSeparator(view.separator, 0, view.JmatrizA.length, view.panelAreaOperaciones, view.JmatrizA[0].length+1);
-        addTextField(view.JmatrizB,  0, view.JmatrizA.length+1, true, view.panelAreaOperaciones, true );        
+        addTextField(view.JmatrizB,  0, view.JmatrizA.length+1, true, view.panelAreaOperaciones, true, 0 );        
         
         addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
         addLabel(new JLabel("Matriz B = "), 0, view.JmatrizA.length+1, view.panelAreaOperaciones, view.JmatrizA.length);                
      
-        addTextField(view.JmatrizC, 0, 0, true, view.panelAreaResultado, false);
+        addTextField(view.JmatrizC, 0, 0, true, view.panelAreaResultado, false, 0);
         addLabel(new JLabel("Matriz C = "), 0, 0, view.panelAreaResultado, view.JmatrizC.length);
         
         addEvents(view.JmatrizA);
@@ -95,13 +95,13 @@ public class ControllerRestarMatrices extends Controller implements ActionListen
             /*llamamos los metodos addTextField, addSeparator y addLabel para agregar los nuevos componentes
             en los respectivos JPanel*/
             
-            addTextField(view.JmatrizA, 0, 0, true, view.panelAreaOperaciones, true);
+            addTextField(view.JmatrizA, 0, 0, true, view.panelAreaOperaciones, true, 0);
             addSeparator(view.separator, 0, longitudFila, view.panelAreaOperaciones, view.JmatrizA[0].length+1);
-            addTextField(view.JmatrizB,  0, longitudFila+1, true, view.panelAreaOperaciones, true );  
+            addTextField(view.JmatrizB,  0, longitudFila+1, true, view.panelAreaOperaciones, true, 0 );  
             addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
             addLabel(new JLabel("Matriz B = "), 0, longitudFila+1, view.panelAreaOperaciones, view.JmatrizA.length);            
 
-            addTextField(view.JmatrizC, 0, 0, true, view.panelAreaResultado, false);
+            addTextField(view.JmatrizC, 0, 0, true, view.panelAreaResultado, false, 0);
             addLabel(new JLabel("Matriz C = "), 0, 0, view.panelAreaResultado, view.JmatrizC.length);
 
             addEvents(view.JmatrizA);
