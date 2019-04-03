@@ -127,19 +127,25 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
                 
                 /*validamos si el formato de los valores del array(matriz) es correcto*/
                 if(model.validateData(Ma)==true){
-                                         
+                    
+                    /*Obtenemos la determinante de la matriz*/
                     String determinante= model.getDeterminante().toString();
                     
+                    /*verificamos que el determinante sea distinto de 0*/
                     if(!determinante.equals("0")){
-                      
+                        
+                        /*Eliminamos los componentes del panelDeterminante*/
                         view.panelDeterminante.removeAll();
                         view.panelDeterminante.updateUI();
                         
+                        /*agregamos nuevos componentes*/
                         addSeparator(new JSeparator(), 0, view.JmatrizARes.length, view.panelAreaResultado, view.JmatrizARes[0].length+1);        
 
                         addTextField(view.JmatrizDetA, 0, view.JmatrizDetA.length+1, true, view.panelAreaResultado, false);
                         addLabel(new JLabel("="), 0, view.JmatrizDetA.length+1, view.panelAreaResultado, view.JmatrizDetA.length);
                         
+                        /*obtenemos la mattriz resultante despues de realizar las operaciones de determinante
+                        y agregamos los valores a los respectivos componentes (JTextField)*/
                         String MdetA [][] = model.getMatriz();
                         for (int i = 0; i < view.JmatrizDetA.length; i++) {
                             for (int j = 0; j < view.JmatrizDetA[0].length; j++) {
@@ -170,7 +176,6 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
 
                         
                     }else{
-                        
                         view.panelAreaResultado.removeAll();
                         view.panelDeterminante.removeAll();
                         view.panelAreaResultado.updateUI();
