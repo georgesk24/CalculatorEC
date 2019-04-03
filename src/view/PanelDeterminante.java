@@ -4,7 +4,8 @@
 package view;
 
 import controller.ControllerDeterminanteMatrices;
-import javax.swing.JSeparator;
+import java.awt.FlowLayout;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
@@ -16,7 +17,7 @@ public class PanelDeterminante extends javax.swing.JPanel {
     /*Creamos tres arreglos bidimensionales de tipo JTextField los cuales haran referencia
     a las matrices que trabajaremos */    
     public JTextField [][] JmatrizA, JmatrizARes, JmatrizDetA; 
-    public JSeparator separator;
+    public JPanel panelDeterminante;
     
     ControllerDeterminanteMatrices controller;
     
@@ -24,14 +25,17 @@ public class PanelDeterminante extends javax.swing.JPanel {
         
         initComponents();
         
-        panelAreaResultado.setVisible(true);
+        panelAreaResultado.setVisible(false);
         
         /*Asignamos dimensiones a los arreglos */
         JmatrizA = new JTextField[2][2];
         JmatrizARes = new JTextField[2][2];
         JmatrizDetA= new JTextField[2][2];        
                 
-        separator = new JSeparator();
+        panelDeterminante = new JPanel();
+        panelDeterminante.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        panelDeterminante.setOpaque(false);
+        
         controller = new ControllerDeterminanteMatrices(this);
         
     }

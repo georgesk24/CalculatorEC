@@ -4,10 +4,12 @@
  */
 package controller;
 
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -99,6 +101,22 @@ public class Controller {
 
     
     }
+
+    public final void addComponent(JComponent component, int x, int y, JPanel panel, int gridWidth){
+        
+        GridBagConstraints config = new GridBagConstraints();
+        
+        config.gridx = x;
+        config.gridy = y;
+        config.gridwidth = gridWidth;
+        config.gridheight = 1;  
+        config.fill = GridBagConstraints.HORIZONTAL;
+        config.anchor = GridBagConstraints.WEST;            
+        config.insets = new Insets(15, 10, 25, 10);                
+        panel.add(component, config);        
+    
+    }
+
     
     /*Agregamos un componente JSeparator para dividir ciertos bloques de nuestra interfaz 
     por ejemplo separar la matriz A de la matriz B*/
