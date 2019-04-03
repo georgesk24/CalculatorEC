@@ -1,21 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Clase ModelDeterminanteMatrices en la cual se realizaran las operaciones logicas, al realizar las operaciones
+ de determinante de matrices 
  */
 package model;
-
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author SOFTWARE GALAXIA TV
  */
 public class ModelDeterminanteMatrices extends Model{
-
+    
+   /*Creamos una variable tipo Fraccion y una matriz o arreglo bidimensional tipo String*/
     private Fraccion intercambio;    
     private String [][] matriz;
-
+    
+    /*Creamos los metodos Get y Set de la clase*/
     private Fraccion getFraccion(String dato){
         return new Fraccion().toFraccion(dato);
     }
@@ -36,20 +35,26 @@ public class ModelDeterminanteMatrices extends Model{
     public void setMatriz(String[][] matriz) {
         this.matriz = matriz;
     }    
-
+    
+    /*metodo constructor de la clase*/
     public ModelDeterminanteMatrices(String[][] matriz) {
         this.matriz = matriz;
         intercambio = new Fraccion(1, 1);
     }
-
+    
+    /*Aqui inician los metodos para obtener el resultado de la determinante*/
+    
     public Fraccion getDeterminante(){
-
+        /*creamos el objeto tipo fraccion en el cual se almacenaran el resultado de la determinante*/
         Fraccion determinante=new Fraccion(1, 1);
         
+        /*evaluamos si la matriz cumple con las propiedades*/
         if(evaluarPropiedades()){
-            
+            /*realizamos el metodo de eliminacion gaussiana esto nos dara una nueva matriz resultante*/
             this.setMatriz(metodoDeGauss()); 
             
+            /*Multiplicamos los valores de la diagonal principla y esto nos dara como resultado
+            la determinante*/
             for (int i = 0; i < matriz.length; i++) {
                 for (int j = 0; j < matriz[0].length; j++) {
                     if(i==j){
@@ -58,15 +63,18 @@ public class ModelDeterminanteMatrices extends Model{
                 }
             }
             
+            /*en caso de que se haya intercambiado una fila debemos multiplicar por el operador(intercambio)
+            recordemos que cuando se intercambian una fila o columna cambia de signo la matriz*/
             determinante = determinante.multiplicar(intercambio);
             
         }else{
+            /*en caso de que no cumpla con las propiedades basicas, la determinante sera igual a cero*/
             determinante = new Fraccion(0, 1);
         }
         return determinante;
     }
     
-
+    /*metodo de gauss*/
     private String[][] metodoDeGauss(){
 
         String [][] newMatriz = this.getMatriz();
@@ -114,7 +122,8 @@ public class ModelDeterminanteMatrices extends Model{
             
         return newMatriz;
     }
-        
+    
+    /*evaluamos si hay dos filas o columnas iguales*/
     private boolean evaluarPropiedades(){
         
         int fila=0, columna=0, i=0;

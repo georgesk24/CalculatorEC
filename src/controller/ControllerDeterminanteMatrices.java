@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *Clase ControllerDeterminanteMatrices.java, donde realizaremos la operaciones para obtener la determinante
+ * de una matriz aplicando una serie de metodos para lograr este resultado, igualmente esta clase 
+ * es el controlador por lo tanto interactuaremos con los metodos del modelo (ModelDeterminanteMatrices.java) 
+ * y los componentes de nuestra vista
  */
 package controller;
 
@@ -11,7 +12,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import model.Model;
@@ -24,6 +24,7 @@ import view.PanelDeterminante;
  */
 public class ControllerDeterminanteMatrices extends Controller implements ActionListener, KeyListener{
     
+    /*Objeto de la vista*/
     PanelDeterminante view;
     
     
@@ -33,23 +34,6 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
         view.btnCalcular.addActionListener(this);
         view.btnLimpiar.addActionListener(this);
     }
-            
-    
-    public ControllerDeterminanteMatrices(PanelDeterminante view) {
-        this.view = view;
-        
-        /*agregamos nuevos componentes a nuestra vista (JTextField, JSeparator, JLabel)*/        
-        addTextField(view.JmatrizA,  0, 0, true, view.panelAreaOperaciones, true);               
-        addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
-        
-        addTextField(view.JmatrizARes, 0, 0, true, view.panelAreaResultado, false);
-        addLabel(new JLabel("A="), 0, 0, view.panelAreaResultado, view.JmatrizARes.length);
-        
-        
-        addEvents(view.JmatrizA);
-        events();
-        
-    }
 
     public final void addEvents(JTextField [][] array){
         for (int i = 0; i < array.length; i++) {
@@ -57,8 +41,27 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
                 array[i][j].addKeyListener(this);
             }
         }
-    }    
+    }        
     
+    /*Metodo constructor de la clase*/
+    public ControllerDeterminanteMatrices(PanelDeterminante view) {
+        this.view = view;
+        
+        /*agregamos nuevos componentes a nuestra vista (JTextField, JLabel)*/        
+        addTextField(view.JmatrizA,  0, 0, true, view.panelAreaOperaciones, true);               
+        addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
+        
+        addTextField(view.JmatrizARes, 0, 0, true, view.panelAreaResultado, false);
+        addLabel(new JLabel("A="), 0, 0, view.panelAreaResultado, view.JmatrizARes.length);
+        
+        /*agregamos los eventos de teclado para los campos de texto generados*/
+        addEvents(view.JmatrizA);
+        events();
+        
+    }
+    
+    /*metodo el cual generara una nueva serie de componentes dinamicos a la vista eliminando los 
+    ya existentes*/
     public void resetearComponentes(){
 
         /*obtenemos los item seleccionados del JcDimensionFila y JcDimensionColumna los cuales
@@ -73,13 +76,14 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
 
 
         /*removemos los componentes que estan agregados actualmente en los respectivos JPanel
-        panelAreaOperaciones y panelAreaResultado */
+        panelAreaOperaciones, panelAreaResultado y panelDeterminante */
         view.panelAreaOperaciones.removeAll();
         view.panelAreaResultado.removeAll();
         view.panelDeterminante.removeAll();
         view.panelAreaResultado.setVisible(false);
-        /*llamamos los metodos addTextField, addSeparator y addLabel para agregar los nuevos componentes
-        en los respectivos JPanel*/
+        
+        /*llamamos los metodos addTextField, y addLabel para agregar los nuevos componentes
+        en el panelAreaResultado*/
 
         addTextField(view.JmatrizA, 0, 0, true, view.panelAreaOperaciones, true);
         addLabel(new JLabel("Matriz A = "), 0, 0, view.panelAreaOperaciones, view.JmatrizA.length);
@@ -90,15 +94,15 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
         /*actualizamos los respectivos JPanel haciendo uso del metodo updateUI de esta manera se efectuaran
         los cambios en nuestra ventana */
 
-        addEvents(view.JmatrizA);
-
         view.panelAreaOperaciones.updateUI();   
         view.panelAreaResultado.updateUI();
         view.panelDeterminante.updateUI();
-    
+
+        addEvents(view.JmatrizA);
+        
     }
     
-    
+    /*Eventos*/
     @Override
     public void actionPerformed(ActionEvent ae) {
         
@@ -113,11 +117,15 @@ public class ControllerDeterminanteMatrices extends Controller implements Action
                         
             String [][] Ma;
             
+            /*pasamos los datos que estan en los JTextField a un array tipo String*/
             Ma = convertirArreglo(view.JmatrizA);       
+            /*llamamos al modelo y le pasamos como parametro el array*/
             ModelDeterminanteMatrices model = new ModelDeterminanteMatrices(Ma);
-
+            
+            /*verificamos si el array esta vacio*/
             if(!model.isEmptyArray(Ma)){
-
+                
+                /*validamos si el formato de los valores del array(matriz) es correcto*/
                 if(model.validateData(Ma)==true){
                                          
                     String determinante= model.getDeterminante().toString();
