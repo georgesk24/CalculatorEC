@@ -1,12 +1,6 @@
 package view;
 
-import controller.ControllerSumarMatrices;
-import javax.swing.JOptionPane;
-import model.Fraccion;
-
 public class OperacionesConMatrices {
-    
-
     
     public static void main(String[] args) {
         
@@ -20,8 +14,6 @@ public class OperacionesConMatrices {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(vistaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
-        
         
         vistaPrincipal v = new vistaPrincipal();
         v.setVisible(true);

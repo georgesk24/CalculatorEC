@@ -188,7 +188,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
 
         barraDesplazamientoMenuPrincipal.setViewportView(panelMenuPrincipal);
 
-        getContentPane().add(barraDesplazamientoMenuPrincipal, java.awt.BorderLayout.LINE_START);
+        getContentPane().add(barraDesplazamientoMenuPrincipal, java.awt.BorderLayout.WEST);
 
         panelOperaciones.setBackground(new java.awt.Color(255, 255, 255));
         panelOperaciones.setLayout(new java.awt.GridBagLayout());
